@@ -14,7 +14,7 @@ def main():
     start_time = time.time()
 
     #test_lib.GettingStartedTF2()
-    test_lib.ImageClassification()
+    test_lib.ClothingDataSetExploring()
 
     elapsed_time = time.time() - start_time
     log_lib.info("%s Completed in %s" % (program_name, utils_lib.elapsed_time_string(elapsed_time)))

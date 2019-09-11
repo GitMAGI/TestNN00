@@ -31,17 +31,44 @@ def GettingStartedTF2():
 
     return
 
-def ImageClassification():
+def ClothingDataSetExploring():
     # Print the TensorFlow Version
     log_lib.debug("Tensor Flow Version %s" % tf.__version__)
 
-    # Load MNIST dataset
+    # Load MNIST dataset (Training + Test)
     fashion_mnist = keras.datasets.fashion_mnist
     (train_images, train_labels), (test_images, test_labels) = fashion_mnist.load_data()
 
-    log_lib.debug("Train Images %d" % len(train_images))
-    log_lib.debug("Train Labels %d" % len(train_labels))
-    log_lib.debug("Test Images %d" % len(test_images))
+    log_lib.debug("Train Images %d with size of %dx%d" % train_images.shape)
+    log_lib.debug("Train Labels %d" % len(train_labels))    
+    log_lib.debug("Test Images %d with size of %dx%d" % test_images.shape)
     log_lib.debug("Test Labels %d" % len(test_labels))
+
+    # All Images belong to hese classes
+    class_ids = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat', 'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
+
+    # Plotting the first image of the training set
+    
+    plt.figure()
+    plt.imshow(train_images[0])
+    plt.colorbar()
+    plt.grid(False)
+    plt.show()
+
+    # Normalization
+    train_images = train_images / 255.0
+    test_images = test_images / 255.0
+
+    # Displaying the first 25 Images of the training set
+    plt.figure(figsize=(10,10))
+    for i in range(25):
+        plt.subplot(5,5,i+1)
+        plt.xticks([])
+        plt.yticks([])
+        plt.grid(False)
+        plt.imshow(train_images[i], cmap=plt.cm.binary)
+        plt.xlabel(class_names[train_labels[i]])
+    plt.show()
 
     return
